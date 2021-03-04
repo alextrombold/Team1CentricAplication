@@ -29,5 +29,7 @@ namespace Team1CentricAplication.Models
         {
             return new ApplicationDbContext();
         }
+
+        public System.Data.Entity.DbSet<Team1CentricAplication.Models.Profiles> Profiles { get; set; }
     }
 }
