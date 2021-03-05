@@ -52,9 +52,9 @@ namespace Team1CentricAplication.Controllers
         {
             if (ModelState.IsValid)
             {
-                //Guid profilesID;
-                //Guid.TryParse(User.Identity.GetUserId(), out profilesID);
-                //profiles.profilesID = profilesID;
+                // Guid profilesID;
+                // Guid.TryParse(User.Identity.GetUserId(), out profilesID);
+                // profiles.profilesID = profilesID;
                 db.Profiles.Add(profiles);
                 db.SaveChanges();
                 return RedirectToAction("Index");
