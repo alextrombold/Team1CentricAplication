@@ -19,20 +19,16 @@
                 </button>
                 <div class="media">
                     <div class="media-left">
-                        <img class="img-responsive" src="centric-logo-white.png"/>
-                        <a href="https://localhost:44313/">
-                            <div class="mask rgba-white-slight"></div>
-                        </a>
+                        <img class="img-responsive" src="centric-logo-white.png" />
                     </div>
-                </div>
-                @Html.ActionLink("Centric Consulting", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                </div> 
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Home", "Index", "Home")</li>
                     <li>@Html.ActionLink("About", "About", "Home")</li>
                     <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-                    <li>@Html.ActionLink("Profiles", "Index", "Profiles")</li>
+                    <li>@Html.ActionLink("Profiles", "Index", "Profiles")</li>  
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                    <li> @Html.Partial("_LoginPartial")</li>
