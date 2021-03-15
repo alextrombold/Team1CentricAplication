@@ -9,17 +9,28 @@ using System.Web;
 using System.Web.Mvc;
 using Team1CentricAplication.DAL;
 using Team1CentricAplication.Models;
+using PagedList;
 
 namespace Team1CentricAplication.Controllers
 {
     public class ProfilesController : Controller
     {
         private Team1Context db = new Team1Context();
-
         // GET: Profiles
-        public ActionResult Index()
+        public ActionResult Index(int? page, string searchString)
         {
-            return View(db.Profiles.ToList());
+            int pgSize = 10;
+            int pageNumber = (page ?? 1);
+            var Profile = from r in db.Profiles select r;
+            // sort the records
+            Profile = db.Profiles.OrderBy(r => r.lastName).ThenBy(r => r.firstName); ;
+            // check to see if a search was requested and do it
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                Profile = Profile.Where(r => r.lastName.Contains(searchString) || r.firstName.Contains(searchString));
+            }
+            var profileList = Profile.ToPagedList(pageNumber, pgSize);
+            return View(profileList);
         }
 
         // GET: Profiles/Details/5

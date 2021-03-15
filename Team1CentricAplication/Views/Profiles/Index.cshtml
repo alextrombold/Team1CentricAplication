@@ -1,63 +1,68 @@
-﻿@model IEnumerable<Team1CentricAplication.Models.Profiles>
-
+﻿@*@model IEnumerable<Team1CentricAplication.Models.Profiles>*@
+@model PagedList.IPagedList<Team1CentricAplication.Models.Profiles>
+@using PagedList.Mvc;
 @{
     ViewBag.Title = "List of Profiles";
 }
 
 <h2>List of Profiles</h2>
-
 <p>
     @Html.ActionLink("Create A New Profile", "Create")
 </p>
 <table class="table table-striped table-condensed">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.firstName)
+            First Name
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.lastName)
+            Last Name
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.phone)
+            Phone
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.email)
+            Email
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.city)
+            City
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.zip)
+            Zip
         </th>
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.firstName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.lastName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.phone)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.email)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.city)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.zip)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.profilesID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.profilesID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.profilesID })
-        </td>
-    </tr>
-}
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.firstName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.lastName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.phone)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.city)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.zip)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.profilesID }) |
+                @Html.ActionLink("Details", "Details", new { id = item.profilesID }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.profilesID })
+            </td>
+        </tr>
+    }
 
 </table>
+
+@*Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @model.PageCount
+    @Html.PagedListPager(Model, Page => Url.Action("Index", new { page}))*@
