@@ -63,6 +63,7 @@
     }
 
 </table>
-
+<br />
 @*Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @model.PageCount
-    @Html.PagedListPager(Model, Page => Url.Action("Index", new { page}))*@
+
+    @Html.PagedListPager(Model, page => Url.Action("Index", new { page}))*@
