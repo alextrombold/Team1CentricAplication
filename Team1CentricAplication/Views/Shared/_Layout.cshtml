@@ -19,7 +19,7 @@
                 </button>
                 <div class="media">
                     <div class="media-left">
-                        <img class="img-responsive" src="centric-logo-white.png" />
+                        <img class="img-responsive" src="~/centric-logo-white.png" />
                     </div>
                 </div> 
             </div>
@@ -41,6 +41,7 @@
                                 <p>
                                     @Html.TextBox("searchString")
                                     <input type="submit" value="Search" />
+                                    @ViewBag.search = String.IsNullOrEmpty(searchString) ? "" : searchString;
                                 </p>
                             }
                         </div>

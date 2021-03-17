@@ -1,6 +1,7 @@
 ﻿@*@model IEnumerable<Team1CentricAplication.Models.Profiles>*@
 @model PagedList.IPagedList<Team1CentricAplication.Models.Profiles>
 @using PagedList.Mvc;
+@Html.PagedListPager(Model, page => Url.Action("Index", new {page, searchString = ViewBag.search}))
 @{
     ViewBag.Title = "List of Profiles";
 }
@@ -64,6 +65,6 @@
 
 </table>
 <br />
-@*Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @model.PageCount
+Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
 
-    @Html.PagedListPager(Model, page => Url.Action("Index", new { page}))*@
+    @Html.PagedListPager(Model, page => Url.Action("Index", new { page}))
