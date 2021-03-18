@@ -45,6 +45,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.AspNet.Scaffolding.EntityFramework.12.0, Version=16.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="PagedList, Version=1.17.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
       <HintPath>..\packages\PagedList.1.17.0.0\lib\net40\PagedList.dll</HintPath>
@@ -252,6 +253,10 @@
     <Content Include="Views\Profiles\Details.cshtml" />
     <Content Include="Views\Profiles\Edit.cshtml" />
     <Content Include="Views\Profiles\Index.cshtml" />
+    <Content Include="Views\Profiles\DuplicateUser.cshtml" />
+    <Content Include="Views\FinishRegistration.cshtml" />
+    <Content Include="Views\Profiles\notAuthorized.cshtml" />
+    <Content Include="Views\Profiles\AdminOnly.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

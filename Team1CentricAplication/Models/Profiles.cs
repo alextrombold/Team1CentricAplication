@@ -9,7 +9,7 @@ namespace Team1CentricAplication.Models
 {
     public class Profiles
     {
-            public int profilesID { get; set; }
+            public Guid profilesID { get; set; }
 
             [Display(Name = "First Name")]
             [Required(ErrorMessage = "Entry required - First name is required")]
@@ -46,7 +46,13 @@ namespace Team1CentricAplication.Models
                     return lastName + ", " + firstName;
                 }
             }
-
+        [Display(Name = "User's role")]
+        public roles role { get; set; }
+        public enum roles 
+        { 
+            admin = 0,
+            employee = 1
         
+        }
     }
 }

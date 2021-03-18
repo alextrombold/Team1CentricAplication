@@ -13,10 +13,13 @@ using PagedList;
 
 namespace Team1CentricAplication.Controllers
 {
+    [Authorize]
     public class ProfilesController : Controller
     {
+
         private Team1Context db = new Team1Context();
         // GET: Profiles
+        [AllowAnonymous]
         public ActionResult Index(int? page, string searchString)
         {
             int pgSize = 10;
@@ -34,7 +37,7 @@ namespace Team1CentricAplication.Controllers
         }
 
         // GET: Profiles/Details/5
-        public ActionResult Details(int? id)
+        public ActionResult Details(Guid? id)
         {
             if (id == null)
             {
@@ -49,6 +52,7 @@ namespace Team1CentricAplication.Controllers
         }
 
         // GET: Profiles/Create
+        [Authorize]
         public ActionResult Create()
         {
             return View();
@@ -59,23 +63,33 @@ namespace Team1CentricAplication.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "profilesID,firstName,lastName,phone,email,city,zip")] Profiles profiles)
+        public ActionResult Create([Bind(Include = "profilesID,firstName,lastName,phone,email,city,zip,role")] Profiles profiles)
         {
-            if (ModelState.IsValid)
+           if (ModelState.IsValid)
             {
-                // Guid profilesID;
-                // Guid.TryParse(User.Identity.GetUserId(), out profilesID);
-                // profiles.profilesID = profilesID;
+                Guid profilesID;
+                Guid.TryParse(User.Identity.GetUserId(), out profilesID);
+                profiles.profilesID = profilesID;
+                profiles.role = Profiles.roles.employee;
                 db.Profiles.Add(profiles);
-                db.SaveChanges();
+                try
+                {
+                    db.SaveChanges();
+                }
+                catch (Exception ex)
+                {
+                    ViewBag.error = ex.Message;
+                    return View("DuplicateUser");
+                }
                 return RedirectToAction("Index");
             }
+
 
             return View(profiles);
         }
 
         // GET: Profiles/Edit/5
-        public ActionResult Edit(int? id)
+        public ActionResult Edit(Guid? id)
         {
             if (id == null)
             {
@@ -86,7 +100,19 @@ namespace Team1CentricAplication.Controllers
             {
                 return HttpNotFound();
             }
-            return View(profiles);
+            Guid profilesId;
+            Guid.TryParse(User.Identity.GetUserId(), out profilesId);
+            Profiles loggedInUser = db.Profiles.Find(profilesId);
+            bool isAdmin = loggedInUser.role == Profiles.roles.admin;
+            if (isAdmin)
+            {
+                return View(profiles);
+            }
+            else
+            {
+                return View("notAuthorized");
+            }
+
         }
 
         // POST: Profiles/Edit/5
@@ -94,7 +120,7 @@ namespace Team1CentricAplication.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "profilesID,firstName,lastName,phone,email,city,zip")] Profiles profiles)
+        public ActionResult Edit([Bind(Include = "profilesID,firstName,lastName,phone,email,city,zip,role")] Profiles profiles)
         {
             if (ModelState.IsValid)
             {
@@ -106,7 +132,7 @@ namespace Team1CentricAplication.Controllers
         }
 
         // GET: Profiles/Delete/5
-        public ActionResult Delete(int? id)
+        public ActionResult Delete(Guid? id)
         {
             if (id == null)
             {
@@ -117,13 +143,25 @@ namespace Team1CentricAplication.Controllers
             {
                 return HttpNotFound();
             }
-            return View(profiles);
+            Guid profilesId;
+            Guid.TryParse(User.Identity.GetUserId(), out profilesId);
+            Profiles loggedInUser = db.Profiles.Find(profilesId);
+            bool isAdmin = loggedInUser.role == Profiles.roles.admin;
+            if (isAdmin)
+            {
+                return View(profiles);
+            }
+            else
+            {
+                return View("AdminOnly");
+            }
+
         }
 
         // POST: Profiles/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
+        public ActionResult DeleteConfirmed(Guid id)
         {
             Profiles profiles = db.Profiles.Find(id);
             db.Profiles.Remove(profiles);
