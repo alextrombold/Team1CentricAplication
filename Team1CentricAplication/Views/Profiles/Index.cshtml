@@ -40,28 +40,28 @@
 
     @foreach (var item in Model)
     {
-<tr>
-    <td>
-        @Html.DisplayFor(modelItem => item.firstName)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.lastName)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.phone)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.email)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.city)
-    </td>
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.firstName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.lastName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.phone)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.city)
+            </td>
 
-    <td>
-        @Html.DisplayFor(modelItem => item.zip)
-    </td>
-    <td>
-        @*{
+            <td>
+                @Html.DisplayFor(modelItem => item.zip)
+            </td>
+            <td>
+                @*{
             Team1Context db = new Team1Context();
             Guid profilesId;
             Guid.TryParse(User.Identity.GetUserId(), out profilesId);
@@ -86,23 +86,39 @@
                 }
             }
         }*@
-        @Html.ActionLink("Details", "Details", new { id = item.profilesID })
-        @{
-            Team1Context db = new Team1Context();
-            Guid profilesId;
-            Guid.TryParse(User.Identity.GetUserId(), out profilesId);
-            Profiles loggedInUser = db.Profiles.Find(profilesId);
-            if (loggedInUser != null)
-            {
-                bool isAdmin = loggedInUser.role == Profiles.roles.admin;
-                if (isAdmin)
-                {
-                    <a href="delete/@item.profilesID"> | Delete</a>
+                @Html.ActionLink("Values", "Create", new { id = item.profilesID })
+                @Html.ActionLink("Details", "Details", new { id = item.profilesID })
+                @{
+                    Team1Context db = new Team1Context();
+                    Guid profilesId;
+                    Guid.TryParse(User.Identity.GetUserId(), out profilesId);
+                    Profiles loggedInUser = db.Profiles.Find(profilesId);
+                    if (loggedInUser != null)
+                    {
+                        bool isAdmin = loggedInUser.role == Profiles.roles.admin;
+                        if (isAdmin)
+                        {
+                            <a href="~/profiles/delete/@item.profilesID"> | Delete</a>
+                        }
+                    }
                 }
-            }
-        }
-    </td>
-</tr>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                &nbsp;
+            </td>
+            <td colspan="5">
+                <ul class="bg-info">
+                    @{
+                        foreach (Team1CentricAplication.Models.Values inv in item.Values)
+                        {
+                            <li class="text-primary">@inv.nominatedValues</li>
+                        }
+                    }
+                </ul>
+            </td>
+        </tr>
     }
 
 </table>

@@ -1,0 +1,49 @@
+﻿@model Team1CentricAplication.Models.Values
+
+@{
+    ViewBag.Title = "Values Details";
+}
+
+<h2>Details of Values Recognized</h2>
+
+<div>
+
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Profiles.firstName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Profiles.firstName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.employeeFirst)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.employeeFirst)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.employeeLast)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.employeeLast)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.nominatedValues)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.nominatedValues)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.valuesId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

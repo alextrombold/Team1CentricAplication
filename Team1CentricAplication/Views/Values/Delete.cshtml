@@ -1,0 +1,54 @@
+﻿@model Team1CentricAplication.Models.Values
+
+@{
+    ViewBag.Title = "Delete Value Recognition";
+}
+
+<h3>Are you sure you want to delete this?</h3>
+
+<div>
+   
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Profiles.firstName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Profiles.firstName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.employeeFirst)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.employeeFirst)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.employeeLast)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.employeeLast)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.nominatedValues)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.nominatedValues)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-danger" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

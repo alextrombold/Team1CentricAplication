@@ -14,5 +14,8 @@ namespace Team1CentricAplication.DAL
 
         }
         public DbSet<Profiles> Profiles { get; set; }
+        
+
+        public System.Data.Entity.DbSet<Team1CentricAplication.Models.Values> Values { get; set; }
     }
 }

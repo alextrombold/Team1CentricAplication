@@ -54,5 +54,6 @@ namespace Team1CentricAplication.Models
             employee = 1
         
         }
+        public ICollection<Values> Values { get; set; }
     }
 }
