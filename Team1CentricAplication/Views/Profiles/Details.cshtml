@@ -1,64 +1,75 @@
 ﻿@model Team1CentricAplication.Models.Profiles
+@*model Team1CentricAplication.Models.Values*@
+
 
 @{
     ViewBag.Title = "Profile Details";
 }
 
-<h2>Details of Selected Profile</h2>
+<h2>@Html.DisplayFor(model => model.firstName) @Html.DisplayFor(model => model.lastName)'s Profile</h2>
 
 <div>
- 
+
     <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.firstName)
-        </dt>
+        @*<dt>
+                @Html.DisplayNameFor(model => model.firstName)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.firstName)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.firstName)
+            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.lastName)
-        </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.lastName)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.lastName)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.lastName)
+            </dd>*@
+        <div>
+            <div class="jumbotron">
+                <dt>
+                    @Html.DisplayNameFor(model => model.phone)
+                </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.phone)
-        </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.phone)
+                </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.phone)
-        </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.email)
+                </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.email)
-        </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.email)
+                </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.email)
-        </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.city)
+                </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.city)
-        </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.city)
+                </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.city)
-        </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.zip)
+                </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.zip)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.zip)
-        </dd>
-
+                <dd>
+                    @Html.DisplayFor(model => model.zip)
+                </dd>
+            </div>
+        </div>
     </dl>
 </div>
+        <tr>
+            <td>
+                @Html.DisplayFor(model => model.nominatedValues)
+            </td>
+        </tr>
+    
+
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.profilesID }) |
     @Html.ActionLink("Back to List", "Index")
