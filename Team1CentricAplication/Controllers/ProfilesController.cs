@@ -19,14 +19,14 @@ namespace Team1CentricAplication.Controllers
 
         private Team1Context db = new Team1Context();
         // GET: Profiles
-        [AllowAnonymous]
+        [Authorize]
         public ActionResult Index(int? page, string searchString)
         {
             int pgSize = 10;
             int pageNumber = (page ?? 1);
             var Profile = from r in db.Profiles select r;
             // sort the records
-            Profile = db.Profiles.Include(p=>p.Values).OrderBy(r => r.lastName).ThenBy(r => r.firstName); ;
+            Profile = db.Profiles.Include(p => p.Values).OrderBy(r => r.lastName).ThenBy(r => r.firstName); ;
             // check to see if a search was requested and do it
             if (!String.IsNullOrEmpty(searchString))
             {
@@ -37,7 +37,7 @@ namespace Team1CentricAplication.Controllers
         }
 
         // GET: Profiles/Details/5
-        public ActionResult ProfilesAndValues ()
+        public ActionResult ProfilesAndValues()
         {
             var profilesList = db.Profiles.Include(o => o.Values).ToList();
             return View("ProfilesAndValues");
@@ -60,6 +60,7 @@ namespace Team1CentricAplication.Controllers
         [Authorize]
         public ActionResult Create()
         {
+
             return View();
         }
 
@@ -70,12 +71,12 @@ namespace Team1CentricAplication.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "profilesID,firstName,lastName,phone,email,city,zip,role")] Profiles profiles)
         {
-           if (ModelState.IsValid)
+            if (ModelState.IsValid)
             {
                 Guid profilesID;
                 Guid.TryParse(User.Identity.GetUserId(), out profilesID);
                 profiles.profilesID = profilesID;
-                profiles.role = Profiles.roles.admin;
+                profiles.role = Profiles.roles.employee;
                 db.Profiles.Add(profiles);
                 try
                 {
@@ -88,7 +89,6 @@ namespace Team1CentricAplication.Controllers
                 }
                 return RedirectToAction("Index");
             }
-
 
             return View(profiles);
         }

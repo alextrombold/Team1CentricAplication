@@ -1,7 +1,7 @@
 ﻿@model Team1CentricAplication.Models.Values
 
 @{
-    ViewBag.Title = "Edit Value";
+    ViewBag.Title = "Edit Values";
 }
 
 <h2>Edit Values Recognition</h2>
@@ -9,43 +9,41 @@
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
+
     <div class="form-horizontal">
 
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.valuesId)
 
         <div class="form-group">
-            @Html.LabelFor(model => model.employeeFirst, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.employeeFirst, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.employeeFirst, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.employeeLast, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.employeeLast, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.employeeLast, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
             @Html.LabelFor(model => model.nominatedValues, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.nominatedValues, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EnumDropDownListFor(model => model.nominatedValues, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.nominatedValues, "", new { @class = "text-danger" })
             </div>
         </div>
+        @*@<div class="form-group">
+                @Html.LabelFor(model => model.recognizor, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.recognizor, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.recognizor, "", new { @class = "text-danger" })
+                </div>
+            </div>@*@
 
         <div class="form-group">
-            @Html.LabelFor(model => model.profilesID, "profilesID", htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.recognitionNote, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownList("profilesID", null, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.profilesID, "", new { @class = "text-danger" })
+                @Html.TextAreaFor(model => model.recognitionNote, 5, 120, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.recognitionNote, "", new { @class = "text-danger" })
             </div>
         </div>
+        @*<div class="form-group">
+            @Html.LabelFor(model => model.recognizationDate, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.recognizationDate, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.recognizationDate, "", new { @class = "text-danger" })
+            </div>
+        </div>*@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
@@ -58,3 +56,14 @@
 <div>
     @Html.ActionLink("Back to List", "Index")
 </div>
+@section Scripts{
+    @Scripts.Render("~/bundles/jqueryval")
+    <script src="https://cdn.tiny.cloud/1/opaq48em3ew4wlven84iqqt8zhh2a4mmd1vugv4fr2m8m30r/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+    <script>
+            tinymce.init({
+                selector: '#recognitionNote',
+                plugins:  'a11ychecker advcode casechange formatpainter linkchecker autolink lists checklist media mediaembed pageembed permanentpen powerpaste table advtable tinymcespellchecker',
+                toolbar_mode: 'floating',
+            });
+    </script>
+}

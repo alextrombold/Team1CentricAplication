@@ -20,10 +20,10 @@ namespace Team1CentricAplication.Controllers
         private Team1Context db = new Team1Context();
 
         // GET: Values
-        [AllowAnonymous]
+        [Authorize]
         public ActionResult Index()
         {
-            var values = db.Values.Include(v => v.Profiles);
+            var values = db.Values;
             return View(values.ToList());
         }
 
@@ -46,25 +46,30 @@ namespace Team1CentricAplication.Controllers
         [Authorize]
         public ActionResult Create()
         {
-            ViewBag.profilesID = new SelectList(db.Profiles, "profilesID", "firstName");
+            ViewBag.profilesID = new SelectList(db.Profiles, "profilesID", "fullName");
             return View();
         }
 
         // POST: Values/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        [ValidateInput(false)]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "valuesId,employeeFirst,employeeLast,nominatedValues,profilesID")] Values values)
+        public ActionResult Create([Bind(Include = "valuesId,nominatedValues,recognizor,recognitionNote,recognitionDate,profilesID")] Values values)
         {
             if (ModelState.IsValid)
             {
+                Guid profilesID;
+                Guid.TryParse(User.Identity.GetUserId(), out profilesID);
+                values.recognizor = profilesID;
+                values.recognizationDate = DateTime.Now;
                 db.Values.Add(values);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.profilesID = new SelectList(db.Profiles, "profilesID", "firstName", values.profilesID);
+            ViewBag.profilesID = new SelectList(db.Profiles, "profilesID", "fullName", values.AwardNominee);
             return View(values);
         }
 
@@ -80,16 +85,17 @@ namespace Team1CentricAplication.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.profilesID = new SelectList(db.Profiles, "profilesID", "firstName", values.profilesID);
+            ViewBag.profilesID = new SelectList(db.Profiles, "profilesID", "fullName", values.AwardNominee);
             return View(values);
         }
 
         // POST: Values/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        [ValidateInput(false)]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "valuesId,employeeFirst,employeeLast,nominatedValues,profilesID")] Values values)
+        public ActionResult Edit([Bind(Include = "valuesId,nominatedValues,recognizor,recognitionNote,recognitionDate,profilesID")] Values values)
         {
             if (ModelState.IsValid)
             {
@@ -97,7 +103,7 @@ namespace Team1CentricAplication.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.profilesID = new SelectList(db.Profiles, "profilesID", "firstName", values.profilesID);
+            ViewBag.profilesID = new SelectList(db.Profiles, "profilesID", "fullName", values.AwardNominee);
             return View(values);
         }
 
