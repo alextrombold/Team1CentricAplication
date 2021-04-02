@@ -4,7 +4,8 @@
 @using Microsoft.AspNet.Identity;
 @using Team1CentricAplication.Models;
 @using Team1CentricAplication.DAL;
-@Html.PagedListPager(Model, page => Url.Action("Index", new {page, searchString = ViewBag.search}))
+@*ViewBag.search = String.IsNullOrEmpty(searchString) ? "" : searchString;*@
+@Html.PagedListPager(Model, page => Url.Action("Index", new { page, searchString = ViewBag.search }))
 
 @{
     ViewBag.Title = "List of Profiles";
@@ -62,30 +63,30 @@
             </td>
             <td>
                 @*{
-            Team1Context db = new Team1Context();
-            Guid profilesId;
-            Guid.TryParse(User.Identity.GetUserId(), out profilesId);
-            Profiles loggedInUser = db.Profiles.Find(profilesId);
-            if (loggedInUser != null)
-            {
-                bool isAdmin = loggedInUser.role == Profiles.roles.admin;
-                if (isAdmin)
-                {
-                    <div class="form-group">
-                        @Html.LabelFor(model => model.role, htmlAttributes: new { @class = "control-label col-md-2" })
-                        <div class="col-md-10">
-                            @Html.EnumDropDownListFor(model => model.role, htmlAttributes: new { @class = "form-control" })
-                            @Html.ValidationMessageFor(model => model.role, "", new { @class = "text-danger" })
+                        Team1Context db = new Team1Context();
+                        Guid profilesId;
+                        Guid.TryParse(User.Identity.GetUserId(), out profilesId);
+                        Profiles loggedInUser = db.Profiles.Find(profilesId);
+                        if (loggedInUser != null)
+                        {
+                            bool isAdmin = loggedInUser.role == Profiles.roles.admin;
+                            if (isAdmin)
+                            {
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.role, htmlAttributes: new { @class = "control-label col-md-2" })
+                                    <div class="col-md-10">
+                                        @Html.EnumDropDownListFor(model => model.role, htmlAttributes: new { @class = "form-control" })
+                                        @Html.ValidationMessageFor(model => model.role, "", new { @class = "text-danger" })
 
-                        </div>
-                    </div>
-                }
-                else
-                {
-                    @Html.HiddenFor(model => model.role, new { Value = @Model.role })
-                }
-            }
-        }*@
+                                    </div>
+                                </div>
+                            }
+                            else
+                            {
+                                @Html.HiddenFor(model => model.role, new { Value = @Model.role })
+                            }
+                        }
+                    }*@
                 @Html.ActionLink("Values", "Create", new { id = item.profilesID })
                 @Html.ActionLink("Details", "Details", new { id = item.profilesID })
                 @{
@@ -125,4 +126,4 @@
 <br />
 Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
 
-    @Html.PagedListPager(Model, page => Url.Action("Index", new { page}))
+@Html.PagedListPager(Model, page => Url.Action("Index", new { page }))
