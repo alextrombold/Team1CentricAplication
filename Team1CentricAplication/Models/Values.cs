@@ -15,12 +15,12 @@ namespace Team1CentricAplication.Models
         [Required(ErrorMessage = "Entry required")]
         public CoreValue nominatedValues { get; set; }
 
-        [Display(Name = "Award Nominee")]
-        [Required(ErrorMessage = "Entry required")]
+        //[Display(Name = "Award Nominee")]
+        //[Required(ErrorMessage = "Entry required")]
 
         public Guid profilesID { get; set; }
 
-        [Display(Name = "Award Nominator")]
+        //[Display(Name = "Award Nominator")]
 
         public Guid recognizor { get; set; }
 
@@ -45,8 +45,8 @@ namespace Team1CentricAplication.Models
         [ForeignKey("recognizor")]
         public virtual Profiles AwardNominator { get; set; }
 
-        [ForeignKey("profilesID")]
-        public virtual Profiles AwardNominee { get; set; }
+        //[ForeignKey("profilesID")]
+        //public virtual Profiles AwardNominee { get; set; }
 
         public ICollection<Profiles> Profiles { get; set; }
     }
