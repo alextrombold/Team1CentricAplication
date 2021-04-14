@@ -26,20 +26,21 @@ namespace Team1CentricAplication.Controllers
             int pageNumber = (page ?? 1);
             var Profile = from r in db.Profiles select r;
             // sort the records
-            Profile = db.Profiles.Include(p => p.Values).OrderBy(r => r.lastName).ThenBy(r => r.firstName); ;
+            Profile = db.Profiles.Include(p => p.AwardRecipient).OrderBy(r => r.lastName).ThenBy(r => r.firstName); ;
             // check to see if a search was requested and do it
             if (!String.IsNullOrEmpty(searchString))
             {
                 Profile = Profile.Where(r => r.lastName.Contains(searchString) || r.firstName.Contains(searchString));
             }
             var profileList = Profile.ToPagedList(pageNumber, pgSize);
+            ViewBag.search = String.IsNullOrEmpty(searchString) ? "" : searchString;
             return View(profileList);
         }
 
         // GET: Profiles/Details/5
         public ActionResult ProfilesAndValues()
         {
-            var profilesList = db.Profiles.Include(o => o.Values).ToList();
+            var profilesList = db.Profiles.Include(o => o.AwardRecipient).ToList();
             return View("ProfilesAndValues");
         }
         public ActionResult Details(Guid? id)

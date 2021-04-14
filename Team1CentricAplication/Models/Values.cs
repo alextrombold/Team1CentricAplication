@@ -44,10 +44,10 @@ namespace Team1CentricAplication.Models
         }
         [ForeignKey("recognizor")]
         public virtual Profiles AwardNominator { get; set; }
+        [ForeignKey("profilesID")]
+        public virtual Profiles AwardRecipient { get; set; }
 
         //[ForeignKey("profilesID")]
         //public virtual Profiles AwardNominee { get; set; }
-
-        public ICollection<Profiles> Profiles { get; set; }
     }
 }

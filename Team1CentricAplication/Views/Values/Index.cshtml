@@ -17,7 +17,7 @@
 <table class="table table-striped table-condensed table-bordered">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.AwardNominee.fullName)
+            @Html.DisplayNameFor(model => model.AwardRecipient.firstName)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.nominatedValues)
@@ -38,7 +38,7 @@
     {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.AwardNominee.fullName)
+                @Html.DisplayFor(modelItem => item.AwardRecipient.fullName)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.nominatedValues)

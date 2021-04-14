@@ -59,8 +59,8 @@ namespace Team1CentricAplication.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "valuesId,nominatedValues,recognizor,recognitionNote,recognitionDate,profilesID")] Values values)
         {
-            //string notification = "Recognition sent to:<br/>";
-            //var Profiles = from a in db.Profiles select a;
+            string notification = "Recognition sent to:<br/>";
+            var Profiles = from a in db.Profiles select a;
             if (ModelState.IsValid)
             {
                 Guid profilesID;
@@ -69,17 +69,15 @@ namespace Team1CentricAplication.Controllers
                 values.recognizationDate = DateTime.Now;
                 db.Values.Add(values);
                 db.SaveChanges();
-                return RedirectToAction("Index");
 
-               
-            }
-            /*if (ModelState.IsValid)
-            {
-                var firstName = 1.Profiles.firstName;
-                var lastName = 1.Profiles.lastName;
-                var email = 1.Profiles.email;
-                var nomintedvalue = 1.Values.nominatedValue;
-                var recognitionNote = 1.Values.recognitionNote;
+
+                //return RedirectToAction("Index");
+
+                var firstName = values.AwardRecipient.firstName;
+                var lastName = values.AwardRecipient.lastName;
+                var email = values.AwardRecipient.email;
+                var nomintedvalue = values.nominatedValues;
+                var recognitionNote = values.recognitionNote;
                 var msg = "Hi" + firstName + " " + lastName + ".\n\nCongrats!! You have been reconized for " + nomintedvalue + ". \n\n This is what they had to say about it! \n" + recognitionNote;
                 MailMessage myMessage = new MailMessage();
                 MailAddress from = new MailAddress("CentricRecognition@gmail.com", "SysAdmin");
@@ -93,12 +91,12 @@ namespace Team1CentricAplication.Controllers
                     smtp.Host = "smtp.gmail.com";
                     smtp.Port = 587;
                     smtp.UseDefaultCredentials = false;
-                    smtp.Credentials = new System.Net.NetworkCredential("GmailUserAcnt", "Password");
+                    smtp.Credentials = new System.Net.NetworkCredential("CentricRecognition@gmail.com", "Centric1A!");
                     smtp.EnableSsl = true;
                     smtp.Send(myMessage);
                     TempData["mailError"] = "";
                 }
-                catch
+                catch(Exception ex)
                 {
                     //this captures an Exception and allows you to display the message in the View
                     TempData["mailError"] = ex.Message;
@@ -107,7 +105,7 @@ namespace Team1CentricAplication.Controllers
 
             }
 
-            ViewBag.notification = notification;*/
+            ViewBag.notification = notification;
 
             ViewBag.profilesID = new SelectList(db.Profiles, "profilesID", "fullName", values.profilesID);
             return View(values);

@@ -58,7 +58,9 @@ namespace Team1CentricAplication.Models
         //public Guid recognizor { get; set; }
 
         //public virtual Values recognizor  { get; set; }
-
-        public ICollection<Values> Values { get; set; }
+        [ForeignKey("recognizor")]
+        public ICollection<Values> AwardNominator { get; set; }
+        [ForeignKey("profilesID")]
+        public ICollection<Values> AwardRecipient { get; set; }
     }
 }
