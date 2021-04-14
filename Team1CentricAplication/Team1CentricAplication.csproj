@@ -263,6 +263,7 @@
     <Content Include="Views\Values\Details.cshtml" />
     <Content Include="Views\Values\Edit.cshtml" />
     <Content Include="Views\Values\Index.cshtml" />
+    <Content Include="Views\Values\mailError.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

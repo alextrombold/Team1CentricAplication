@@ -72,10 +72,10 @@ namespace Team1CentricAplication.Controllers
 
 
                 //return RedirectToAction("Index");
-
-                var firstName = values.AwardRecipient.firstName;
-                var lastName = values.AwardRecipient.lastName;
-                var email = values.AwardRecipient.email;
+                var recipient = db.Profiles.Find(values.profilesID);
+                var firstName = recipient.firstName;
+                var lastName = recipient.lastName;
+                var email = recipient.email;
                 var nomintedvalue = values.nominatedValues;
                 var recognitionNote = values.recognitionNote;
                 var msg = "Hi" + firstName + " " + lastName + ".\n\nCongrats!! You have been reconized for " + nomintedvalue + ". \n\n This is what they had to say about it! \n" + recognitionNote;
