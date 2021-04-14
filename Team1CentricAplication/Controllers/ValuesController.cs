@@ -10,6 +10,7 @@ using System.Web.Mvc;
 using Team1CentricAplication.DAL;
 using Team1CentricAplication.Models;
 using PagedList;
+using System.Net.Mail;
 
 namespace Team1CentricAplication.Controllers
 {
@@ -58,6 +59,8 @@ namespace Team1CentricAplication.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "valuesId,nominatedValues,recognizor,recognitionNote,recognitionDate,profilesID")] Values values)
         {
+            //string notification = "Recognition sent to:<br/>";
+            //var Profiles = from a in db.Profiles select a;
             if (ModelState.IsValid)
             {
                 Guid profilesID;
@@ -67,9 +70,46 @@ namespace Team1CentricAplication.Controllers
                 db.Values.Add(values);
                 db.SaveChanges();
                 return RedirectToAction("Index");
+
+               
+            }
+            /*if (ModelState.IsValid)
+            {
+                var firstName = 1.Profiles.firstName;
+                var lastName = 1.Profiles.lastName;
+                var email = 1.Profiles.email;
+                var nomintedvalue = 1.Values.nominatedValue;
+                var recognitionNote = 1.Values.recognitionNote;
+                var msg = "Hi" + firstName + " " + lastName + ".\n\nCongrats!! You have been reconized for " + nomintedvalue + ". \n\n This is what they had to say about it! \n" + recognitionNote;
+                MailMessage myMessage = new MailMessage();
+                MailAddress from = new MailAddress("CentricRecognition@gmail.com", "SysAdmin");
+                myMessage.From = from;
+                myMessage.To.Add(email);
+                myMessage.Subject = "You have been reconized";
+                myMessage.Body = msg;
+                try
+                {
+                    SmtpClient smtp = new SmtpClient();
+                    smtp.Host = "smtp.gmail.com";
+                    smtp.Port = 587;
+                    smtp.UseDefaultCredentials = false;
+                    smtp.Credentials = new System.Net.NetworkCredential("GmailUserAcnt", "Password");
+                    smtp.EnableSsl = true;
+                    smtp.Send(myMessage);
+                    TempData["mailError"] = "";
+                }
+                catch
+                {
+                    //this captures an Exception and allows you to display the message in the View
+                    TempData["mailError"] = ex.Message;
+                    return View("mailError");
+                }
+
             }
 
-            ViewBag.profilesID = new SelectList(db.Profiles, "profilesID", "fullName", values.AwardNominee);
+            ViewBag.notification = notification;*/
+
+            ViewBag.profilesID = new SelectList(db.Profiles, "profilesID", "fullName", values.profilesID);
             return View(values);
         }
 
@@ -85,7 +125,7 @@ namespace Team1CentricAplication.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.profilesID = new SelectList(db.Profiles, "profilesID", "fullName", values.AwardNominee);
+            ViewBag.profilesID = new SelectList(db.Profiles, "profilesID", "fullName", values.profilesID);
             return View(values);
         }
 
@@ -103,7 +143,7 @@ namespace Team1CentricAplication.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.profilesID = new SelectList(db.Profiles, "profilesID", "fullName", values.AwardNominee);
+            ViewBag.profilesID = new SelectList(db.Profiles, "profilesID", "fullName", values.profilesID);
             return View(values);
         }
 
