@@ -6,8 +6,17 @@
 
 <h2>Create A New Profile</h2>
 
+@{ 
+    if (ViewBag.Errormsg != null)
+    {
+        <div class="alert alert-danger">
+            <h3>@ViewBag.Errormsg.ToString()</h3>
+            <br />
+        </div>
+    }
+}
 
-@using (Html.BeginForm()) 
+@using (Html.BeginForm("Create", "Profiles", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
     
@@ -61,6 +70,15 @@
             @Html.ValidationMessageFor(model => model.zip, "", new { @class = "text-danger" })
         </div>
     </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.profilePicture, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            <input id="UploadedInmage" type="file" name="UploadedImage" />
+            @Html.ValidationMessageFor(model => model.profilePicture, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
     <!--
         <div class="form-group">
             @Html.LabelFor(model => model.role, htmlAttributes: new { @class = "control-label col-md-2" })

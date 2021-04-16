@@ -47,6 +47,10 @@ namespace Team1CentricAplication.Models
                 return lastName + ", " + firstName;
             }
         }
+
+        [Display(Name = "Profile Picture")]
+        public string profilePicture { get; set; }
+
         [Display(Name = "User's role")]
         public roles role { get; set; }
         public enum roles
@@ -55,6 +59,9 @@ namespace Team1CentricAplication.Models
             employee = 1
 
         }
+
+   
+
         //public Guid recognizor { get; set; }
 
         //public virtual Values recognizor  { get; set; }

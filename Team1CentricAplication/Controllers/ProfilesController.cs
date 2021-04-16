@@ -3,20 +3,19 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using PagedList;
 using Team1CentricAplication.DAL;
 using Team1CentricAplication.Models;
-using PagedList;
 
 namespace Team1CentricAplication.Controllers
 {
-    [Authorize]
     public class ProfilesController : Controller
     {
-
         private Team1Context db = new Team1Context();
         // GET: Profiles
         [Authorize]
@@ -65,6 +64,7 @@ namespace Team1CentricAplication.Controllers
             return View();
         }
 
+
         // POST: Profiles/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
@@ -89,10 +89,44 @@ namespace Team1CentricAplication.Controllers
                     return View("DuplicateUser");
                 }
                 return RedirectToAction("Index");
+       
+
+            }
+            if (ModelState.IsValid)
+            {
+
+                HttpPostedFileBase file = Request.Files["UploadedImage"];
+                if (file != null && file.FileName != null && file.FileName != "")
+                {
+                    FileInfo fi = new FileInfo(file.FileName);
+                    if (fi.Extension != ".png" && fi.Extension != ".jpg" && fi.Extension != ".gif")
+                    {
+                        ViewBag.Errormsg = "The file, " + file.FileName + ", does not have a valide image extension.";
+                        return View(profiles);
+                    }
+                    else
+                    {
+                        profiles.profilePicture = Guid.NewGuid().ToString() + fi.Extension;
+                        file.SaveAs(Server.MapPath("~/Images/" + profiles.profilePicture));
+
+                    }
+                    db.Profiles.Add(profiles);
+                    db.SaveChanges();
+                    return RedirectToAction("Index", "Profiles");
+                }
+                else
+                {
+                    return View(profiles);
+                }
+
+
             }
 
             return View(profiles);
+
+
         }
+
 
         // GET: Profiles/Edit/5
         public ActionResult Edit(Guid? id)
@@ -126,7 +160,7 @@ namespace Team1CentricAplication.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "profilesID,firstName,lastName,phone,email,city,zip,role")] Profiles profiles)
+        public ActionResult Edit([Bind(Include = "profilesID,firstName,lastName,phone,email,city,zip,role,profilePicture")] Profiles profiles)
         {
             if (ModelState.IsValid)
             {
