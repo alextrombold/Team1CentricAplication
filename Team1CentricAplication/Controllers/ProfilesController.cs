@@ -70,7 +70,7 @@ namespace Team1CentricAplication.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "profilesID,firstName,lastName,phone,email,city,zip,role")] Profiles profiles)
+        public ActionResult Create([Bind(Include = "profilesID,firstName,lastName,phone,email,city,zip,role,profilePicture")] Profiles profiles)
         {
             if (ModelState.IsValid)
             {
@@ -78,30 +78,14 @@ namespace Team1CentricAplication.Controllers
                 Guid.TryParse(User.Identity.GetUserId(), out profilesID);
                 profiles.profilesID = profilesID;
                 profiles.role = Profiles.roles.employee;
-                db.Profiles.Add(profiles);
-                try
-                {
-                    db.SaveChanges();
-                }
-                catch (Exception ex)
-                {
-                    ViewBag.error = ex.Message;
-                    return View("DuplicateUser");
-                }
-                return RedirectToAction("Index");
-       
-
-            }
-            if (ModelState.IsValid)
-            {
 
                 HttpPostedFileBase file = Request.Files["UploadedImage"];
                 if (file != null && file.FileName != null && file.FileName != "")
                 {
                     FileInfo fi = new FileInfo(file.FileName);
-                    if (fi.Extension != ".png" && fi.Extension != ".jpg" && fi.Extension != ".gif")
+                    if (fi.Extension != ".png" && fi.Extension != ".PNG" && fi.Extension != ".jpg" && fi.Extension != ".gif")
                     {
-                        ViewBag.Errormsg = "The file, " + file.FileName + ", does not have a valide image extension.";
+                        ViewBag.Errormsg = "The file, " + file.FileName + ", does not have a valid image extension.";
                         return View(profiles);
                     }
                     else
@@ -110,21 +94,24 @@ namespace Team1CentricAplication.Controllers
                         file.SaveAs(Server.MapPath("~/Images/" + profiles.profilePicture));
 
                     }
-                    db.Profiles.Add(profiles);
-                    db.SaveChanges();
-                    return RedirectToAction("Index", "Profiles");
-                }
-                else
-                {
-                    return View(profiles);
-                }
 
+                    db.Profiles.Add(profiles);
+                    try
+                    {
+                        db.SaveChanges();
+                    }
+                    catch (Exception ex)
+                    {
+                        ViewBag.error = ex.Message;
+                        return View("DuplicateUser");
+                    }
+                    return RedirectToAction("Index");
+
+
+                }
 
             }
-
             return View(profiles);
-
-
         }
 
 
@@ -164,6 +151,80 @@ namespace Team1CentricAplication.Controllers
         {
             if (ModelState.IsValid)
             {
+                string removeImage = "";
+                if (Request.Form["removeImage"] != null)
+                {
+                    removeImage = Request.Form["removeImage"];
+                }
+
+                HttpPostedFileBase file = Request.Files["UploadedImage"];
+
+                if (file != null && file.FileName != null && file.FileName != "")
+                {
+                    FileInfo fi = new FileInfo(file.FileName);
+                    if (fi.Extension != ".png" && fi.Extension != ".PNG"  && fi.Extension != ".jpg" && fi.Extension != ".gif")
+                    {
+                        ViewBag.Errormsg = "Image File Extension is not valid.";
+                        return View(profiles);
+                    }
+                    else
+                    {
+                        string path = Server.MapPath("~/Images/" + TempData["oldPhoto"].ToString());
+                        try
+                        {
+                            if (System.IO.File.Exists(path))
+                            {
+                                System.IO.File.Delete(path);
+                            }
+                            else
+                            {
+                                // no file
+                            }
+                        }
+                        catch (Exception Ex)
+                        {
+                            ViewBag.deleteFiled = Ex.Message;
+                            return View("DeleteFailed");
+                        }
+                        if (fi.Name != null && fi.Name != "")
+                        {
+                            profiles.profilePicture = Guid.NewGuid().ToString() + fi.Extension;
+                            file.SaveAs(Server.MapPath("~/Images/" + profiles.profilePicture));
+                        }
+                    }
+                }
+                else
+                {
+                    if (TempData["oldPhoto"] != null)
+                    {
+                        if (removeImage == "Remove") 
+                        {
+                            profiles.profilePicture = "";
+                            string path = Server.MapPath("~/Images/" + TempData["oldPhoto"].ToString());
+                            try
+                            {
+                                if (System.IO.File.Exists(path))
+                                {
+                                    System.IO.File.Delete(path);
+                                }
+                                else
+                                {
+                                    // no file
+                                }
+                            }
+                            catch (Exception Ex)
+                            {
+                                ViewBag.deleteFiled = Ex.Message;
+                                return View("DeleteFailed");
+                            }
+
+                        }
+                    else
+                        {
+                            profiles.profilePicture = TempData["oldPhoto"].ToString();
+                        }
+                    } 
+                }
                 db.Entry(profiles).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -204,6 +265,26 @@ namespace Team1CentricAplication.Controllers
         public ActionResult DeleteConfirmed(Guid id)
         {
             Profiles profiles = db.Profiles.Find(id);
+            string imageName = profiles.profilePicture;
+            string path = Server.MapPath("~/Images/" + imageName);
+            try
+            {
+                if (System.IO.File.Exists(path))
+                {
+                    System.IO.File.Delete(path);
+                }
+                else
+                {
+                    // no file
+                }
+            }
+            catch (Exception Ex)
+            {
+                ViewBag.deleteFiled = Ex.Message;
+                return View("DeleteFailed");
+            }
+
+            
             db.Profiles.Remove(profiles);
             db.SaveChanges();
             return RedirectToAction("Index");
