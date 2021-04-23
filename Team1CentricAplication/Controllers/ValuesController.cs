@@ -24,6 +24,20 @@ namespace Team1CentricAplication.Controllers
         [Authorize]
         public ActionResult Index()
         {
+            /*IList<Values> valuesList = new List<Values>()
+            {
+                
+            };
+            var top10 = (from Values in db.Values, Profile in db.Profiles
+                         where Values.
+                         orderby  descending
+                         select Values).Take(10);*/
+
+
+
+
+
+
             var values = db.Values;
             return View(values.ToList());
         }
@@ -78,7 +92,7 @@ namespace Team1CentricAplication.Controllers
                 var email = recipient.email;
                 var nomintedvalue = values.nominatedValues;
                 var recognitionNote = values.recognitionNote;
-                var msg = "Hi" + firstName + " " + lastName + ".\n\nCongrats!! You have been reconized for " + nomintedvalue + ". \n\n This is what they had to say about it! \n" + recognitionNote;
+                var msg = "Hi " + firstName + " " + lastName + ".\n\nCongrats!! You have been reconized for " + nomintedvalue + ". \n\n This is what they had to say about it! \n\n" + recognitionNote;
                 MailMessage myMessage = new MailMessage();
                 MailAddress from = new MailAddress("CentricRecognition@gmail.com", "SysAdmin");
                 myMessage.From = from;
