@@ -55,6 +55,7 @@ namespace Team1CentricAplication.Models
         public roles role { get; set; }
         public enum roles
         {
+          
             admin = 0,
             employee = 1
 
