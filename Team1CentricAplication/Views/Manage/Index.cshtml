@@ -10,7 +10,7 @@
 
 <p class="text-success">@ViewBag.StatusMessage</p>
 
-<div class="jumbotron">
+<div class="jumbotron" style="background-color: antiquewhite">
     <h1 class="text-center text-capitalize"> Account Settings </h1>
     <p class="lead text-center"> @(User.Identity.GetUserName()) </p>
 </div>
@@ -23,15 +23,18 @@
         <dt>Edit: </dt>
         <dd>
             @{
+
                 Team1Context db = new Team1Context();
                 Guid profilesId;
                 Guid.TryParse(User.Identity.GetUserId(), out profilesId);
                 Profiles loggedInUser = db.Profiles.Find(profilesId);
                 if (loggedInUser != null)
+
                 {
-                    @*<a href="~/profiles/edit/@item.profilesID"> Edit</a>*@
-                    @Html.ActionLink("Edit", "Edit", new { id = profilesId })
+                    <a href="~/profiles/edit/@User.Identity.GetUserId()"> Edit</a>
                 }
+
+
             }
         </dd>
 
@@ -102,7 +105,7 @@
                 {
                     @Html.AntiForgeryToken()
                     <text>Enabled
-                        <input type="submit" value="Disable" class="btn btn-default" />
+                        <input type="submit" value="Disable" class="btn btn-danger" />
                     </text>
                 }
             }

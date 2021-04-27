@@ -64,14 +64,15 @@
 <div>
     @Html.ActionLink("Back to List", "Index")
 </div>
+
 @section Scripts{
     @Scripts.Render("~/bundles/jqueryval")
     <script src="https://cdn.tiny.cloud/1/opaq48em3ew4wlven84iqqt8zhh2a4mmd1vugv4fr2m8m30r/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
     <script>
-            tinymce.init({
-                selector: '#recognitionNote',
-                plugins:  'a11ychecker advcode casechange formatpainter linkchecker autolink lists checklist media mediaembed pageembed permanentpen powerpaste table advtable tinymcespellchecker',
-                toolbar_mode: 'floating',
-            });
+        tinymce.init({
+            selector: '#recognitionNote',
+            plugins: 'a11ychecker advcode casechange formatpainter linkchecker autolink lists checklist media mediaembed pageembed permanentpen powerpaste table advtable tinymcespellchecker',
+            toolbar_mode: 'floating',
+        });
     </script>
 }

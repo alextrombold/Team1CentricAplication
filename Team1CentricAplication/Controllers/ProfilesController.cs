@@ -133,6 +133,9 @@ namespace Team1CentricAplication.Controllers
             bool isAdmin = loggedInUser.role == Profiles.roles.admin;
             if (isAdmin)
             {
+                Profiles currentProfile = db.Profiles.Find(id);
+                TempData["oldPhoto"] = currentProfile.profilePicture;
+
                 return View(profiles);
             }
             else
@@ -169,7 +172,7 @@ namespace Team1CentricAplication.Controllers
                     }
                     else
                     {
-                        string path = Server.MapPath("~/Images/" + TempData["oldPhoto"].ToString());
+                        string path = Server.MapPath("~/Uploads/" + TempData["oldPhoto"].ToString());
                         try
                         {
                             if (System.IO.File.Exists(path))
@@ -183,7 +186,7 @@ namespace Team1CentricAplication.Controllers
                         }
                         catch (Exception Ex)
                         {
-                            ViewBag.deleteFiled = Ex.Message;
+                            ViewBag.deleteFailed = Ex.Message;
                             return View("DeleteFailed");
                         }
                         if (fi.Name != null && fi.Name != "")
@@ -197,7 +200,7 @@ namespace Team1CentricAplication.Controllers
                 {
                     if (TempData["oldPhoto"] != null)
                     {
-                        if (removeImage == "Remove") 
+                        if (removeImage=="Remove") 
                         {
                             profiles.profilePicture = "";
                             string path = Server.MapPath("~/Images/" + TempData["oldPhoto"].ToString());
@@ -214,7 +217,7 @@ namespace Team1CentricAplication.Controllers
                             }
                             catch (Exception Ex)
                             {
-                                ViewBag.deleteFiled = Ex.Message;
+                                ViewBag.deleteFailed = Ex.Message;
                                 return View("DeleteFailed");
                             }
 
