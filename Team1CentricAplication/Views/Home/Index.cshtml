@@ -1,5 +1,11 @@
 ﻿@{
     ViewBag.Title = "Centric Consulting";
+    var top10 = ViewBag.top10;
+    var Excellence = ViewBag.excelence;
+    var Integrity = ViewBag.integrity;
+    var Stewardship = ViewBag.stewardship;
+    var Innovate = ViewBag.innovate;
+
 }
 
 <div class="jumbotron" style="background-color: orange">
@@ -13,7 +19,12 @@
 </ul>
 <div class="tab-contet">
     <div id="Overall" class="tab-pane fade in active">
+        @*{
+            var top = (Team1CentricAplication.Models.Values)top10;
+            
 
+            Html.RenderPartial("_Top10", top);
+                }*@
     </div>
 
     <div id="Values" class="tab-pane fade">
@@ -26,19 +37,59 @@
         </ul>
         <div class="tab-contet">
             <div id="Excellence" class="tab-pane fade in active">
-
+                <div class="table-responsive">
+                    <table class="table">
+                        <tr>
+                            <th>
+                                
+                            </th>
+                        </tr>
+                    </table>
+                </div>
             </div>
             <div id="Integrity" class="tab-pane fade">
-
+                <div class="table-responsive">
+                    <table class="table">
+                        <tr>
+                            <th>
+                                
+                            </th>
+                        </tr>
+                    </table>
+                </div>
             </div>
             <div id="Stewardship" class="tab-pane fade">
-
+                <div class="table-responsive">
+                    <table class="table">
+                        <tr>
+                            <th>
+                                
+                            </th>
+                        </tr>
+                    </table>
+                </div>
             </div>
             <div id="Innovate" class="tab-pane fade">
-
+                <div class="table-responsive">
+                    <table class="table">
+                        <tr>
+                            <th>
+                               
+                            </th>
+                        </tr>
+                    </table>
+                </div>
             </div>
             <div id="Balance" class="tab-pane fade">
-
+                <div class="table-responsive">
+                    <table class="table">
+                        <tr>
+                            <th>
+                                
+                            </th>
+                        </tr>
+                    </table>
+                </div>
             </div>
         </div>
     </div>

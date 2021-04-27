@@ -22,25 +22,14 @@ namespace Team1CentricAplication.Controllers
 
         // GET: Values
         [Authorize]
+ 
         public ActionResult Index()
         {
-            /*IList<Values> valuesList = new List<Values>()
-            {
-                
-            };
-            var top10 = (from Values in db.Values, Profile in db.Profiles
-                         where Values.
-                         orderby  descending
-                         select Values).Take(10);*/
-
-
-
-
-
-
+            
             var values = db.Values;
             return View(values.ToList());
         }
+
 
         // GET: Values/Details/5
         public ActionResult Details(int? id)
