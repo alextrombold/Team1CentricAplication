@@ -14,7 +14,7 @@
 <p>
     @Html.ActionLink("Create A New Profile", "Create")
 </p>
-<table class="table-striped table-condensed table-hover">
+<table class="table table-striped table-condensed table-hover" style="background-color: antiquewhite">
 
     <tr>
         <th>
@@ -38,9 +38,14 @@
         <th>
             Zip
         </th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
 
 
     </tr>
+    <tr></tr>
 
 
     @foreach (var item in Model)
@@ -68,10 +73,6 @@
             <td>
                 @Html.DisplayFor(modelItem => item.zip)
             </td>
-            @*<td>
-                    @Html.DisplayFor(modelItem => item.role)
-                </td>*@
-
             <td>
                 @{
                     Team1Context db = new Team1Context();
@@ -83,16 +84,21 @@
                         bool isAdmin = loggedInUser.role == Profiles.roles.admin;
                         if (isAdmin)
                         {
-                            <a href="~/profiles/edit/@item.profilesID"> Edit |</a>
+                            <a href="~/profiles/edit/@item.profilesID"> Edit</a>
                         }
 
                     }
                 }
+            </td>
+            <td>
                 @{
-                    <a href="~/values/create/@item.profilesID"> Recognize |</a>
+                    <a href="~/values/create/@item.profilesID"> Recognize</a>
                 }
-
+            </td>
+            <td>
                 @Html.ActionLink("Details", "Details", new { id = item.profilesID })
+            </td>
+            <td>
                 @{
 
                     if (loggedInUser != null)
@@ -100,33 +106,33 @@
                         bool isAdmin = loggedInUser.role == Profiles.roles.admin;
                         if (isAdmin)
                         {
-                            <a href="~/profiles/delete/@item.profilesID"> | Delete</a>
+                            <a href="~/profiles/delete/@item.profilesID"> Delete</a>
                         }
                     }
                 }
             </td>
         </tr>
- @*</table>
-   <table class="table table-striped table-condensed ">*@
-            <tr>
-                <td>
-                    &nbsp;
-                </td>
-                <td colspan="5">
-                    <ul class="bg-info">
-                        @{
-                            foreach (Team1CentricAplication.Models.Values inv in item.AwardRecipient)
-                            {
-                                <li class="text-primary">@inv.nominatedValues</li>
-                            }
+        @*</table>
+            <table class="table table-striped table-condensed ">*@
+        <tr>
+            <td>
+                &nbsp;
+            </td>
+            <td colspan="10">
+                <ul class="bg-success" style="background-color: antiquewhite">
+                    @{
+                        foreach (Team1CentricAplication.Models.Values inv in item.AwardRecipient)
+                        {
+                            <li class="text-justify">@inv.nominatedValues</li>
                         }
-                    </ul>
-                </td>
-            </tr>
+                    }
+                </ul>
+            </td>
+        </tr>
 
-            }
-        </table>
-        <br />
+    }
+</table>
+<br />
         Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
 
         @Html.PagedListPager(Model, page => Url.Action("Index", new { page, searchString = ViewBag.search }))
