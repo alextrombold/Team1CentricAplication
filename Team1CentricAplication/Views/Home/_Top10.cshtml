@@ -1,11 +1,11 @@
-﻿@model IEnumerable<Team1CentricAplication.Models.Values>
+﻿@model IEnumerable<Team1CentricAplication.Models.Profiles>
+@{ 
+    var top = ViewBag.top10;
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
+}
 <table class="table">
     <tr>
-        <th>
+        @*<th>
             @Html.DisplayNameFor(model => model.AwardNominator.firstName)
         </th>
         <th>
@@ -23,12 +23,18 @@
         <th>
             @Html.DisplayNameFor(model => model.recognizationDate)
         </th>
-        <th></th>
+        <th></th>*@
+        <th>
+            Nominee
+        </th>
+        <th>
+            Award Count
+        </th>
     </tr>
 
-@foreach (var item in Model) {
+@foreach (var item in top) {
     <tr>
-        <td>
+        @*<td>
             @Html.DisplayFor(modelItem => item.AwardNominator.firstName)
         </td>
         <td>
@@ -45,11 +51,12 @@
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.recognizationDate)
+        </td>*@
+        <td>
+            @item.fullName
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.valuesId }) |
-            @Html.ActionLink("Details", "Details", new { id=item.valuesId }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.valuesId })
+            @item.AwardRecipient.Count
         </td>
     </tr>
 }

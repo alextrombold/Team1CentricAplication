@@ -5,6 +5,11 @@ using System.Web;
 using System.Web.Mvc;
 using Team1CentricAplication.DAL;
 using Team1CentricAplication.Models;
+using System.Data;
+using System.Data.Entity;
+using System.Net;
+using Microsoft.AspNet.Identity;
+
 
 namespace Team1CentricAplication.Controllers
 {
@@ -15,11 +20,12 @@ namespace Team1CentricAplication.Controllers
         {
             var values = db.Values;
             IList<Values> valuesList = values.ToList();
-            var top10 = (from v in valuesList
-                         group v by v.AwardNominee into g
-                         let count = g.Count()
-                         orderby count descending
-                         select new { Value = g.Key, Count = count }).Take(10);
+            //var top10 = (from v in valuesList
+            //             group v by v.AwardNominee into g
+            //             let count = g.Count()
+            //             orderby count descending
+            //             select new { Value = g.Key, Count = count }).Take(10);
+            var top10 = db.Profiles.Include(p => p.AwardRecipient).OrderByDescending(p => p.AwardRecipient.Count()).Take(10);
             var Excellence10 = (from v in valuesList
                                 where v.nominatedValues == Values.CoreValue.Excellence
                                 group v by v.AwardNominee into g
@@ -50,8 +56,8 @@ namespace Team1CentricAplication.Controllers
                              let count = g.Count()
                              orderby count descending
                              select new { Value = g.Key, Count = count }).Take(10);
-
-            ViewBag.top10 = top10;
+            var top = top10.ToList();
+            ViewBag.top10 = top10.ToList(); ;
             ViewBag.excellence = Excellence10;
             ViewBag.integrity = Integrity10;
             ViewBag.stewardship = Stewardship10;
