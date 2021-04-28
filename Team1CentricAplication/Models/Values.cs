@@ -14,6 +14,7 @@ namespace Team1CentricAplication.Models
 
         [Display(Name = "Award")]
         [Required(ErrorMessage = "Entry required")]
+        
         public CoreValue nominatedValues { get; set; }
 
         [Display(Name = "Award Nominee")]
@@ -35,6 +36,8 @@ namespace Team1CentricAplication.Models
 
 
         public DateTime? recognizationDate { get; set; }
+
+        
         public enum CoreValue
         {
             Excellence = 1,

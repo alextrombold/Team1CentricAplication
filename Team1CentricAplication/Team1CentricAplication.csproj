@@ -264,6 +264,12 @@
     <Content Include="Views\Values\Edit.cshtml" />
     <Content Include="Views\Values\Index.cshtml" />
     <Content Include="Views\Home\_Top10.cshtml" />
+    <Content Include="Views\Home\_Excellence.cshtml" />
+    <Content Include="Views\Home\_Integrity.cshtml" />
+    <Content Include="Views\Home\_Balance.cshtml" />
+    <Content Include="Views\Home\_Stewardship.cshtml" />
+    <Content Include="Views\Home\_Innovate.cshtml" />
+    <Content Include="Views\Profiles\_awardspartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

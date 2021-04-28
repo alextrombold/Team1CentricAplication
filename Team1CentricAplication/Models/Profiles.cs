@@ -70,5 +70,6 @@ namespace Team1CentricAplication.Models
         public ICollection<Values> AwardNominator { get; set; }
         [ForeignKey("profilesID")]
         public ICollection<Values> AwardRecipient { get; set; }
+       
     }
 }

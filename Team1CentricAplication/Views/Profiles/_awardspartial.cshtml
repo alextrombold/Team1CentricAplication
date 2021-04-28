@@ -1,0 +1,57 @@
+﻿@model IEnumerable<Team1CentricAplication.Models.Values>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.AwardNominator.firstName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AwardNominee.firstName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AwardRecipient.firstName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.nominatedValues)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.recognitionNote)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.recognizationDate)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.AwardNominator.firstName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AwardNominee.firstName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AwardRecipient.firstName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.nominatedValues)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.recognitionNote)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.recognizationDate)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.valuesId }) |
+            @Html.ActionLink("Details", "Details", new { id=item.valuesId }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.valuesId })
+        </td>
+    </tr>
+}
+
+</table>

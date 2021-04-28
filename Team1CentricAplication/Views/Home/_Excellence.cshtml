@@ -1,0 +1,44 @@
+﻿@model IEnumerable<Team1CentricAplication.Models.Profiles>
+@{
+    var top = ViewBag.excellence;
+
+}
+<style>
+    table {
+        counter-reset: rowNumber;
+    }
+
+        table tr:not(:first-child) {
+            counter-increment: rowNumber;
+        }
+
+        table tr td:first-child::before {
+            content: counter(rowNumber) ".";
+            min-width: 1em;
+            margin-right: 0.5em;
+        }
+</style>
+<table class="table">
+    <tr>
+        <th>
+            Employee
+        </th>
+        <th>
+            Number of Excellence Awards
+        </th>
+    </tr>
+
+    @foreach (var item in top)
+    {
+        <tr>
+            <td>
+                @item.fullName
+            </td>
+            <td>
+                @item.AwardRecipient.Count
+            </td>
+        </tr>
+    }
+
+</table>
+

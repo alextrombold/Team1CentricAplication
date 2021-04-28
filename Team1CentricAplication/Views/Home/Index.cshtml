@@ -1,102 +1,7 @@
 ﻿@{
-    ViewBag.Title = "Centric Consulting";
-    var top10 = ViewBag.top10;
-    var Excellence = ViewBag.excelence;
-    var Integrity = ViewBag.integrity;
-    var Stewardship = ViewBag.stewardship;
-    var Innovate = ViewBag.innovate;
+    ViewBag.Title = "Centric Consulting"; 
 
 }
-
-<div class="jumbotron" style="background-color: orange">
-    <h1 class="text-center text-capitalize">Centric Consulting</h1>
-    <p class="lead text-center">Welcome to the Centric Consulting Employee Core Values Recognition Site!</p>
-    <p class="text-right"><a href="https://centricconsulting.com/" class="btn btn-default btn-lg">View Centric Consultings Main Page &raquo;</a> </p>
-</div>
-<ul class="nav nav-tabs">
-    <li class="panel panel-default active"><a data-toggle="tab" href="#Overall">Overall LeaderBoard</a></li>
-    <li class="panel panel-default"><a data-toggle="tab" href="#Values">Core Values</a></li>
-</ul>
-<div class="tab-contet">
-    <div id="Overall" class="tab-pane fade in active">
-     @Html.Partial("_Top10")
-    </div>
-
-    <div id="Values" class="tab-pane fade">
-        <ul class="nav nav-tabs">
-            <li class="panel panel-default active"><a data-toggle="tab" href="#Excellence">Excellence</a></li>
-            <li class="panel panel-default"><a data-toggle="tab" href="#Integrity">Integrity</a></li>
-            <li class="panel panel-default"><a data-toggle="tab" href="#Stewardship">Stewardship</a></li>
-            <li class="panel panel-default"><a data-toggle="tab" href="#Innovate">Innovate</a></li>
-            <li class="panel panel-default"><a data-toggle="tab" href="#Balance">Balance</a></li>
-        </ul>
-        <div class="tab-contet">
-            <div id="Excellence" class="tab-pane fade in active">
-                <div class="table-responsive">
-                    <table class="table">
-                        <tr>
-                            <th>
-                                
-                            </th>
-                        </tr>
-                    </table>
-                </div>
-            </div>
-            <div id="Integrity" class="tab-pane fade">
-                <div class="table-responsive">
-                    <table class="table">
-                        <tr>
-                            <th>
-                                
-                            </th>
-                        </tr>
-                    </table>
-                </div>
-            </div>
-            <div id="Stewardship" class="tab-pane fade">
-                <div class="table-responsive">
-                    <table class="table">
-                        <tr>
-                            <th>
-                                
-                            </th>
-                        </tr>
-                    </table>
-                </div>
-            </div>
-            <div id="Innovate" class="tab-pane fade">
-                <div class="table-responsive">
-                    <table class="table">
-                        <tr>
-                            <th>
-                               
-                            </th>
-                        </tr>
-                    </table>
-                </div>
-            </div>
-            <div id="Balance" class="tab-pane fade">
-                <div class="table-responsive">
-                    <table class="table">
-                        <tr>
-                            <th>
-                                
-                            </th>
-                        </tr>
-                    </table>
-                </div>
-            </div>
-        </div>
-    </div>
-<div class="panel panel-default">
-    <h2 class="panel-heading">Centric Consulting Contact</h2>
-    <div class="panel-body">
-        <div class="btn-group-lg">
-            <p><a href="https://m.facebook.com/CentricConsultingNational" class="btn btn-primary"> Facebook &raquo;</a>,<a href="https://twitter.com/centric" class="btn btn-info"> Twitter &raquo;</a>,<a href="https://www.instagram.com/centricconsulting/" class="btn btn-warning"> Instagram &raquo;</a>,<a href="https://www.linkedin.com/company/centric-consulting" class="btn btn-primary"> LinkedIn &raquo;</a>,<a href="https://www.youtube.com/channel/UCFmtoIKH1ijwpGpiJBxl4dw" class="btn btn-danger"> YouTube &raquo;</a></p>
-        </div>
-    </div>
-</div>
-
 <div id="myCarousel" class="carousel slide" data-ride="carousel">
     <!-- Indicators -->
     <ol class="carousel-indicators">
@@ -138,3 +43,53 @@
         <span class="sr-only">Next</span>
     </a>
 </div>
+
+<ul class="nav nav-tabs">
+    <li class="panel panel-default active"><a data-toggle="tab" href="#Overall">Overall LeaderBoard</a></li>
+    <li class="panel panel-default"><a data-toggle="tab" href="#Values">Core Values</a></li>
+</ul>
+<div class="tab-contet">
+    <div id="Overall" class="tab-pane fade in active collapse in">
+     @Html.Partial("_Top10")
+    </div>
+
+    <div id="Values" class="tab-pane fade">
+        <ul class="nav nav-tabs">
+            <li class="panel panel-default active"><a data-toggle="tab" href="#Excellence">Excellence</a></li>
+            <li class="panel panel-default"><a data-toggle="tab" href="#Integrity">Integrity</a></li>
+            <li class="panel panel-default"><a data-toggle="tab" href="#Stewardship">Stewardship</a></li>
+            <li class="panel panel-default"><a data-toggle="tab" href="#Innovate">Innovate</a></li>
+            <li class="panel panel-default"><a data-toggle="tab" href="#Balance">Balance</a></li>
+        </ul>
+        <div class="tab-content">
+            <div id="Excellence" class="tab-pane fade in active collapse in">
+                @Html.Partial("_Excellence")
+            </div>
+        
+            <div id="Integrity" class="tab-pane fade collapse in">
+                @Html.Partial("_Integrity")
+            </div>
+        
+            <div id="Stewardship" class="tab-pane fade collapse in">
+                @Html.Partial("_Stewardship")
+            </div>
+        
+            <div id="Innovate" class="tab-pane fade collapse in">
+                @Html.Partial("_Innovate")
+            </div>
+        
+            <div id="Balance" class="tab-pane fade collapse in">
+                @Html.Partial("_Balance")
+            </div>
+        </div>
+    </div>
+
+<div class="panel panel-default">
+    <h2 class="panel-heading">Centric Consulting Contact</h2>
+    <div class="panel-body">
+        <div class="btn-group-lg">
+            <p><a href="https://m.facebook.com/CentricConsultingNational" class="btn btn-primary"> Facebook &raquo;</a>,<a href="https://twitter.com/centric" class="btn btn-info"> Twitter &raquo;</a>,<a href="https://www.instagram.com/centricconsulting/" class="btn btn-warning"> Instagram &raquo;</a>,<a href="https://www.linkedin.com/company/centric-consulting" class="btn btn-primary"> LinkedIn &raquo;</a>,<a href="https://www.youtube.com/channel/UCFmtoIKH1ijwpGpiJBxl4dw" class="btn btn-danger"> YouTube &raquo;</a></p>
+        </div>
+    </div>
+</div>
+

@@ -5,53 +5,18 @@
 }
 <table class="table">
     <tr>
-        @*<th>
-            @Html.DisplayNameFor(model => model.AwardNominator.firstName)
+        
+        <th>
+            Employee
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.AwardNominee.firstName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.AwardRecipient.firstName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.nominatedValues)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.recognitionNote)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.recognizationDate)
-        </th>
-        <th></th>*@
-        <th>
-            Nominee
-        </th>
-        <th>
-            Award Count
+            Number of Awards
         </th>
     </tr>
 
 @foreach (var item in top) {
     <tr>
-        @*<td>
-            @Html.DisplayFor(modelItem => item.AwardNominator.firstName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.AwardNominee.firstName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.AwardRecipient.firstName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.nominatedValues)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.recognitionNote)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.recognizationDate)
-        </td>*@
+       
         <td>
             @item.fullName
         </td>

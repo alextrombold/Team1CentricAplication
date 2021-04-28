@@ -1,0 +1,30 @@
+﻿@model IEnumerable<Team1CentricAplication.Models.Profiles>
+@{
+    var top = ViewBag.stewardship;
+
+}
+
+<table class="table">
+    <tr>
+        <th>
+            Employee
+        </th>
+        <th>
+            Number of Stewardship Awards
+        </th>
+    </tr>
+
+    @foreach (var item in top)
+    {
+        <tr>
+            <td>
+                @item.fullName
+            </td>
+            <td>
+                @item.AwardRecipient.Count
+            </td>
+        </tr>
+    }
+
+</table>
+
