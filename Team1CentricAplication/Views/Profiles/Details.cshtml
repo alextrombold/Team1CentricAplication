@@ -1,5 +1,4 @@
 ﻿@model Team1CentricAplication.Models.Profiles
-@*model Team1CentricAplication.Models.Values*@
 
 
 @{
@@ -72,10 +71,9 @@
 
     </dl>
 </div>
-@Html.Partial("_awardspartial")
-
-
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.profilesID }) |
     @Html.ActionLink("Back to List", "Index")
 </p>
+
+@*Html.Partial("_awardspartial")*@

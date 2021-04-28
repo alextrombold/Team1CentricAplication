@@ -34,7 +34,7 @@ namespace Team1CentricAplication.Controllers
             //                    select new { Value = g.Key, Count = count }).Take(10);
             var Excellence10 = db.Profiles.Include(p => p.AwardRecipient).OrderByDescending(p => p.AwardRecipient.Count()).Take(10);
 
-           //var Integrity10 = (from v in valuesList
+            //var Integrity10 = (from v in valuesList
             //                 where v.nominatedValues == Values.CoreValue.Integrity
             //               group v by v.AwardNominee into g
             //             let count = g.Count()

@@ -1,8 +1,8 @@
 ﻿@model IEnumerable<Team1CentricAplication.Models.Values>
+@{
+    var top = ViewBag.award;
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
+}
 <table class="table">
     <tr>
         <th>
@@ -26,32 +26,28 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.AwardNominator.firstName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.AwardNominee.firstName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.AwardRecipient.firstName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.nominatedValues)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.recognitionNote)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.recognizationDate)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.valuesId }) |
-            @Html.ActionLink("Details", "Details", new { id=item.valuesId }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.valuesId })
-        </td>
-    </tr>
-}
+    @foreach (var item in top)
+    {
+        <tr>
+            <td>
+                @item.AwardNominator.firstName
+            </td>
+            <td>
+                @item.AwardNominee.firstName
+            </td>
+            <td>
+                @item.AwardRecipient.firstName
+            </td>
+            <td>
+                @item.nominatedValues
+            </td>
+            <td>
+                @item.recognitionNote
+            </td>
+            <td>
+                @item.recognizationDate
+            </td>
+        </tr>
+    }
 
 </table>

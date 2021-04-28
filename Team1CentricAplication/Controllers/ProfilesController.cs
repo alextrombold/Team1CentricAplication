@@ -33,6 +33,9 @@ namespace Team1CentricAplication.Controllers
             }
             var profileList = Profile.ToPagedList(pageNumber, pgSize);
             ViewBag.search = String.IsNullOrEmpty(searchString) ? "" : searchString;
+
+            var awards = db.Values.Where(a => a.AwardNominee == a.AwardRecipient);
+            ViewBag.award = awards.ToList();
             return View(profileList);
         }
 
