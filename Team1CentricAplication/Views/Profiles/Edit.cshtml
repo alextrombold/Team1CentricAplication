@@ -7,7 +7,7 @@
 <h2>Edit Employee Profiles</h2>
 
 
-@using (Html.BeginForm())
+@using (Html.BeginForm("Edit", "Profiles", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
 
