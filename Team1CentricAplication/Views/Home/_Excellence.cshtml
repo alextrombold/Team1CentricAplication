@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Team1CentricAplication.Models.Profiles>
+﻿@model IEnumerable<Team1CentricAplication.Models.Values>
 @{
     var top = ViewBag.excellence;
 
@@ -21,24 +21,30 @@
 <table class="table">
     <tr>
         <th>
-            Employee
+            Nominee
         </th>
         <th>
-            Number of Excellence Awards
+            Nominator
+        </th>
+        <th>
+            Date
         </th>
     </tr>
 
     @foreach (var item in top)
     {
         
-        <tr>
-            <td>
-                @item.fullName
-            </td>
-            <td>
-                @item.AwardRecipient.Count
-            </td>
-        </tr>
+<tr>
+    <td>
+        @item.AwardNominee.fullName
+    </td>
+    <td>
+        @item.AwardNominator.fullName
+    </td>
+    <td>
+        @item.recognizationDate
+    </td>
+</tr>
     
     }
 

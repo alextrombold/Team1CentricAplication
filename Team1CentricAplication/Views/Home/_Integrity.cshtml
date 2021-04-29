@@ -7,23 +7,31 @@
 <table class="table">
     <tr>
         <th>
-            Employee
+            Nominee
         </th>
         <th>
-            Number of Integrity Awards
+            Nominator
+        </th>
+        <th>
+            Date
         </th>
     </tr>
 
     @foreach (var item in top)
     {
+
         <tr>
             <td>
-                @item.fullName
+                @item.AwardNominee.fullName
             </td>
             <td>
-                @item.AwardRecipient.Count
+                @item.AwardNominator.fullName
+            </td>
+            <td>
+                @item.recognizationDate
             </td>
         </tr>
+
     }
 
 </table>
