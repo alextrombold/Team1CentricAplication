@@ -63,6 +63,8 @@ namespace Team1CentricAplication.Controllers
             //         orderby count descending
             //       select new { Value = g.Key, Count = count }).Take(10);
             var Balance10 = db.Values.Where(v => v.nominatedValues == Values.CoreValue.Balance).Include(v => v.AwardNominee).OrderByDescending(o => o.recognizationDate).Take(10);
+            var Greater10 = db.Values.Where(v => v.nominatedValues == Values.CoreValue.Balance).Include(v => v.AwardNominee).OrderByDescending(o => o.recognizationDate).Take(10);
+            var Culture10 = db.Values.Where(v => v.nominatedValues == Values.CoreValue.Balance).Include(v => v.AwardNominee).OrderByDescending(o => o.recognizationDate).Take(10);
 
 
             ViewBag.top10 = top10.ToList();
@@ -71,6 +73,8 @@ namespace Team1CentricAplication.Controllers
             ViewBag.stewardship = Stewardship10.ToList();
             ViewBag.innovate = Innovate10.ToList();
             ViewBag.balance = Balance10.ToList();
+            ViewBag.greater = Greater10.ToList();
+            ViewBag.culture = Culture10.ToList();
             return View();
         }
 
