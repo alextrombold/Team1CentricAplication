@@ -270,6 +270,8 @@
     <Content Include="Views\Home\_Stewardship.cshtml" />
     <Content Include="Views\Home\_Innovate.cshtml" />
     <Content Include="Views\Profiles\_awardspartial.cshtml" />
+    <Content Include="Views\Home\_Greater.cshtml" />
+    <Content Include="Views\Home\_Culture.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
