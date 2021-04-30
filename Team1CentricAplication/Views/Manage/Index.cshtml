@@ -31,7 +31,13 @@
                 if (loggedInUser != null)
 
                 {
-                    <a href="~/profiles/edit/@User.Identity.GetUserId()"> Edit</a>
+                    bool isAdmin = loggedInUser.role == Profiles.roles.admin;
+                    bool isEmployee = loggedInUser.role == Profiles.roles.employee;
+                    if (isAdmin || isEmployee)
+                    {
+                        <a href="~/profiles/edit/@User.Identity.GetUserId()"> Edit</a>
+                    }
+
                 }
 
 

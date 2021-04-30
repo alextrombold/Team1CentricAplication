@@ -43,7 +43,9 @@ namespace Team1CentricAplication.Models
             Integrity = 2,
             Stewardship = 3,
             Innovate = 4,
-            Balance = 5
+            Balance = 5,
+            GreaterGood = 6,
+            Culture = 7
         }
         [ForeignKey("recognizor")]
         public virtual Profiles AwardNominator { get; set; }
